@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name = "AppWorld" default = "BuildAll" basedir =".">
+	<property name="src" value="src"/>
+	<property name="build" value="build"/>
+	<property name="lib" value="lib"/>
+	<property name="jar" value ="jar"/>
+	
+	<target name = "BuildAll" depends ="AppListW" description="Builds the whole project">
+		<echo>Doing all</echo>
+	</target>
+	<target name = "AppListW" depends ="Info,Login,Register, AppApproval, AppSubmission" description = "Builds main AppListW file">
+		<echo>Doing AppListW</echo>
+		<javac srcdir="${src}" destdir ="${build}" includes="AppListW.java"/>
+		<!-- C:\Users\kalit\Desktop\AppWorld -->
+		<echo>Doing Executable Jar File</echo>
+		<jar destfile="jar/MyProject.jar" basedir="${build}">
+			<manifest>
+				<attribute name = "Main-Class" value = "AppListW"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name = "Info"  description = "Builds Info file">
+		<echo>Doing Info</echo>
+		<javac srcdir="${src}" destdir ="${build}" includes="Info.java"/> 
+	</target>
+	
+	<target name = "AppApproval"  description = "Builds AppApproval file">
+		<echo>Doing Info</echo>
+		<javac srcdir="${src}" destdir ="${build}" includes="AppApproval.java"/> 
+	</target>
+	
+	<target name = "AppSubmission"  description = "Builds AppSubmission file">
+		<echo>Doing Info</echo>
+		<javac srcdir="${src}" destdir ="${build}" includes="AppSubmission.java"/> 
+	</target>
+	
+	<target name = "Login"  description = "Builds Login file">
+		<echo>Doing Login</echo>
+		<javac srcdir="${src}" destdir ="${build}" includes="Login.java"/> 
+	</target>
+	
+	<target name = "Register" description ="Builds Register file">
+		<echo>Doing Register</echo>
+		<javac srcdir="${src}" destdir ="${build}" includes="Register.java"/>
+	</target>
+	
+	<target name="Clean" description="Removes previous build">
+		<delete verbose="true">
+			<fileset dir="${build}"/>
+		</delete>
+		<delete verbose="true">
+			<fileset dir="${jar}"/>
+		</delete>
+	</target>
+	<target name="Run" description="Runs current build">
+		<java classname = "AppListW">
+			<classpath path = "${build}"/>
+		</java>
+	</target>
+</project>
